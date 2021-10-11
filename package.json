@@ -4,7 +4,7 @@
   "description": "",
   "keywords": [],
   "private": true,
-  "author": "Alejandro González Romero",
+  "author": "",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

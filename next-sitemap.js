@@ -1,5 +1,5 @@
 module.exports = {
-    siteUrl: 'https://axstuff.com',
+    siteUrl: process.env.SITE_URL,
     generateRobotsTxt: true,
     transform: async (config, path) => {
         return {
