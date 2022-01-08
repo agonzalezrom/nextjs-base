@@ -1,6 +1,6 @@
-import {LoadingGearContainer, LoadingGearOne, LoadingGearThree, LoadingGearTwo} from "./styles";
+import {LoadingGearContainer, LoadingGearOne, LoadingGearThree, LoadingGearTwo} from "./styles"
 
-const Loading = ({theme = "light"}) => (
+export const Loading = ({theme = "light"}) => (
     <>
         <div className="d-flex justify-content-center">
             <LoadingGearContainer>
@@ -11,5 +11,3 @@ const Loading = ({theme = "light"}) => (
         </div>
     </>
 )
-
-export default Loading

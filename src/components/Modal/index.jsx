@@ -1,8 +1,8 @@
 import {Children} from "react"
 import {Modal as ModalBootstrap} from 'react-bootstrap'
-import {ModalStyle} from "./styles";
+import {ModalStyle} from "./styles"
 
-const Modal = ({show = false, buttonClose = true, onClose, children, size= "md"}) => {
+export const Modal = ({show = false, buttonClose = true, onClose, children, size= "md"}) => {
 
     return (
         <ModalBootstrap
@@ -29,5 +29,3 @@ const Modal = ({show = false, buttonClose = true, onClose, children, size= "md"}
         </ModalBootstrap>
     )
 }
-
-export default Modal

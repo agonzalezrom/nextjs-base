@@ -24,10 +24,3 @@ export const setComponentsPerCols = (elements, cols) => {
 export const dateToTimestamp = date => {
     return '@' + Math.round(date.getTime()/1000)
 }
-
-export const mediaUrlBuilder = (id, file_name, disk) => {
-    if (disk === "s3")
-        return "https://" + process.env.NEXT_PUBLIC_AWS_BUCKET + ".s3." + process.env.NEXT_PUBLIC_AWS_DEFAULT_REGION + ".amazonaws.com/" + id + "/" + file_name
-    if(disk === "local")
-        return process.env.NEXT_PUBLIC_SITE_BE + "/" + file_name
-}

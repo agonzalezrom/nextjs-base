@@ -1,9 +1,10 @@
 import NextAuth from "next-auth"
-import Providers from "next-auth/providers"
+import CredentialsProvider from "next-auth/providers/credentials"
+import {parseJwt} from "../../../src/functions"
 
 export default NextAuth({
   providers: [
-    Providers.Credentials({
+    CredentialsProvider({
       async authorize(credentials) {
         const post = {
           email: credentials.email,
@@ -12,44 +13,41 @@ export default NextAuth({
         const res = await fetch(process.env.NEXT_PUBLIC_SITE_BE + "/api/users/login", {
           method: 'POST',
           body: JSON.stringify(post),
-          headers: {"Accept": "application/json", "Content-Type": "application/json" }
+          headers: {"Content-Type": "application/json" }
         })
-        const data = await res.json()
-        if (typeof data.token !== "undefined" && typeof data.token === "string") {
-          return data
+        const user = await res.json()
+        if (user) {
+          return user
         }
         return null
       }
     }),
   ],
 
+  callbacks: {
+    async session({ session, token }) {
+      session = token
+      return session
+    },
+    async jwt({ token, user, account, profile, isNewUser }) {
+      if(user?.jwt)
+      {
+        const parsedJwt = parseJwt(user?.jwt)
+        token.jwt = user?.jwt
+        token.id = parsedJwt.id
+        token.authorities = parsedJwt.authorities
+        token.lastname = parsedJwt.lastname
+        token.phone = parsedJwt.phone
+      }
+      return token
+    }
+  },
+
   secret: process.env.SECRET,
 
   session: {
     jwt: true,
   },
-
-  jwt: {},
-
-  pages: {},
-
-  callbacks: {
-    async session(session, jwt) {
-      session.user = jwt.user
-      session.accessToken = jwt.token
-      return session
-    },
-    async jwt(jwt, user) {
-      if(user?.user && user?.token)
-      {
-        jwt.user = user?.user
-        jwt.token = user?.token
-      }
-      return jwt
-    }
-  },
-
-  events: {},
 
   theme: 'auto',
 

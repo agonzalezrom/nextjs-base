@@ -17,22 +17,22 @@ export const AlertProvider = ({children}) => {
         })
     }
 
-    const successAlert = (title, text, then) => {
+    const successAlert = (title, text, then = ()=>{}) => {
         swal({
             title: title,
             text: text,
             icon: "success",
-            button: "Continuar",
+            button: "Continue",
             closeOnClickOutside: false,
         }).then(then)
     }
 
-    const notificationAlert = (title, text, then) => {
+    const notificationAlert = (title, text, then  = ()=>{}) => {
         swal({
             title: title,
             text: text,
             icon: "info",
-            button: "Continuar",
+            button: "Continue",
             closeOnClickOutside: false,
         }).then(then)
     }
@@ -42,7 +42,7 @@ export const AlertProvider = ({children}) => {
             title: title,
             text: text,
             icon: "error",
-            button: "Continuar",
+            button: "Continue",
             closeOnClickOutside: false,
         }).then(then)
     }
@@ -52,11 +52,11 @@ export const AlertProvider = ({children}) => {
             title: title,
             text: text,
             icon: "warning",
-            buttons: ["Cancelar", "Continuar"],
+            buttons: ["Cancel", "Continue"],
             closeOnClickOutside: false,
             dangerMode: true,
         }).then((pressed) => {
-                if (pressed === "Continuar") {
+                if (pressed) {
                     onConfirmation()
                 }
           });

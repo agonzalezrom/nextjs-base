@@ -3,12 +3,14 @@
     "baseUrl": ".",
     "target": "es5",
     "paths": {
-      "@/components/*": ["src/components/*"],
-      "@/assets/*": ["src/assets/*"],
-      "@/hooks/*": ["src/hooks/*"],
-      "@/providers/*": ["src/providers/*"],
-      "@/types/*": ["src/types/*"],
-      "@/modals/*": ["src/modals/*"]
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@providers/*": ["src/providers/*"],
+      "@modals/*": ["src/modals/*"],
+      "@datatables/*": ["src/datatables/*"],
+      "@functions": ["src/functions.js"],
+      "@config": ["src/confifg.js"]
     },
     "lib": [
       "dom",
@@ -25,13 +27,15 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "incremental": true,
     "jsx": "preserve"
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "additional.d.ts"
+    "additional.d.ts",
+    "src/types.d.ts"
   ],
   "exclude": [
     "node_modules"

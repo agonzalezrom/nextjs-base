@@ -1,5 +1,5 @@
 import axios from "axios"
-import { getSession } from "next-auth/client"
+import { getSession } from "next-auth/react"
 
 export const GA_TRACKING_ID = process.env.NEXT_PUBLIC_GA_TRACKING_ID
 
@@ -28,10 +28,11 @@ const Axios = axios.create({
 if (process.browser) {
     async function getToken() {
         const session = await getSession()
-        return session?.accessToken
+        return session?.jwt
     }
-    getToken().then((token)=>{
-        Axios.defaults.headers.common['Authorization'] = typeof token === "string" ? `Bearer ${token}` : null
+    getToken().then(jwt => {
+        if(typeof jwt === "string")
+            Axios.defaults.headers.common['Authorization'] = `Bearer ${jwt}`
     })
 }
 
@@ -42,3 +43,18 @@ Axios.defaults.headers.post['Content-Type'] = 'multipart/form-data'
 Axios.defaults.headers.put['Content-Type'] = 'application/json'
 
 export {Axios}
+
+
+export const customSelectStyles = {
+    option: (provided, state) => ({
+        ...provided,
+        background: state.isSelected ? '#ccc' : state.isFocused ? '#f3f3f3' : 'white',
+    }),
+    control: (provided, state) => ({
+        ...provided,
+        border: state.isHover ? '2px solid #ccc' : "1px solid #ccc",
+        boxShadow: '0 0 0 1px #d7b287',
+        borderColor: state.isFocused ? '#ccc' : state.isHover ? '#ccc' : 'white'
+    })
+}
+
